@@ -223,7 +223,6 @@ async function setupQuiz() {
   renderExtras();
 }
 
-const PAGE_LOAD_TIME = new Date();
 
 // Initialize app
 function init() {
