@@ -2,7 +2,8 @@
 import { loadState, saveState } from './state.js';
 
 // Config
-const LOCK_PASS = 'pole'; // change to your secret word
+// Senha romântica (minúsculo, sem acento, sem espaço). Troque para o apelido real de vocês.
+const LOCK_PASS = 'pole';
 const START_DATE = new Date('2015-01-01T00:00:00');
 const LOVE_MIN = 750000;
 const HATE_MIN = 95000;
@@ -222,7 +223,6 @@ async function setupQuiz() {
   renderMemories();
   renderExtras();
 }
-
 
 // Initialize app
 function init() {
