@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contrato — Impostômetro do Amor</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="brand">Pole &amp; Gabriel</div>
+      <h2 class="title">Contrato do Relacionamento <span class="heart">♥</span></h2>
+    </div>
+    <nav class="top-actions">
+      <a class="btn btn-ghost" href="index.html">← Voltar</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <div class="panel-head">
+        <h3>📝 Assinatura oficial (piada interna)</h3>
+        <div class="muted tiny">Depois de assinar, libera o download do PDF pronto.</div>
+      </div>
+
+      <p class="muted">Assine abaixo com o dedo (celular) ou mouse (PC):</p>
+      <canvas id="sig" class="sig" width="720" height="240"></canvas>
+
+      <div class="row mt-8">
+        <button id="clear" class="btn btn-ghost" type="button">Limpar</button>
+        <button id="save" class="btn" type="button">Salvar assinatura</button>
+      </div>
+
+      <div id="sig-msg" class="mt-8"></div>
+
+      <div id="download" class="download hidden">
+        <h4>✅ Assinado!</h4>
+        <p>Agora pode baixar o contrato:</p>
+        <a class="btn" href="assets/docs/contrato.pdf" download>Baixar contrato (PDF)</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/state.js"></script>
+  <script src="assets/js/contract.js"></script>
+</body>
+</html>

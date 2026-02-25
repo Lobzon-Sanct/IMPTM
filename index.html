@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Impostômetro do Amor</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="theme-color" content="#ffe6f2" />
+</head>
+<body>
+  <!-- BLOQUEIO (não confunda com Cloudflare Access; isso é só uma brincadeira local) -->
+  <div id="lock-screen" class="overlay">
+    <div class="lock-card">
+      <div class="lock-icon">🔒</div>
+      <h1>Acesso Exclusivo</h1>
+      <p class="muted">Digite o apelido carinhoso para desbloquear.</p>
+      <div class="lock-row">
+        <input id="lock-input" type="password" placeholder="apelido..." autocomplete="off" />
+        <button id="lock-button" class="btn">Entrar</button>
+      </div>
+      <div id="lock-error" class="error" aria-live="polite"></div>
+      <p class="tiny muted">Dica: você pode trocar a senha no arquivo <code>assets/js/script.js</code>.</p>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div>
+        <div class="brand">Pole &amp; Gabriel</div>
+        <h2 class="title">Impostômetro do Amor <span class="heart">♥</span></h2>
+      </div>
+      <div class="top-actions">
+        <button id="mute-btn" class="btn btn-ghost" type="button" title="Ativar/Mutar música">🔊</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="panel">
+        <div class="panel-head">
+          <h3>📊 Nosso Impostômetro do Amor</h3>
+          <div class="muted tiny">Números simbólicos — mas totalmente científicos.</div>
+        </div>
+
+        <!-- 4 cards alinhados (sempre). O card do “te odeio” só aparece quando desbloquear. -->
+        <div class="grid grid-4" id="main-cards">
+          <div class="card">
+            <div class="card-kicker">DIAS DE HISTÓRIA</div>
+            <div class="card-value" id="days-count">0</div>
+            <div class="card-desc">dias acumulando momentos (e prints comprometedores).</div>
+          </div>
+          <div class="card">
+            <div class="card-kicker">HORAS DE CONVERSA</div>
+            <div class="card-value" id="hours-count">0</div>
+            <div class="card-desc">estimativa de horas falando, mandando áudio e rindo à toa.</div>
+          </div>
+          <div class="card">
+            <div class="card-kicker">“EU TE AMO” ENVIADOS</div>
+            <div class="card-value" id="love-count">750000</div>
+            <div class="card-desc">e ainda é pouco perto do que eu sinto por você.</div>
+          </div>
+          <div class="card">
+            <div class="card-kicker">PLANOS MALUCOS JUNTOS</div>
+            <div class="card-value" id="plans-count">0</div>
+            <div class="card-desc">viagens, projetos e ideias que só fazem sentido pra gente.</div>
+          </div>
+        </div>
+
+        <!-- Esse aparece SÓ depois da resposta correta do step 4 -->
+        <div id="hate-wrapper" class="mt-12 hidden">
+          <div class="card card-accent">
+            <div class="card-kicker">“TE ODEIO / TE MATO / IDIOTA” APROXIMADOS</div>
+            <div class="card-value" id="hate-count">95000</div>
+            <div class="card-desc">contador totalmente científico de quantas vezes você fingiu me odiar, mas tava só me amando de mau humor. 😌</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h3>🎮 Missão: destravar nossas memórias</h3>
+          <div class="muted tiny">As perguntas ficam na tela. Cada acerto libera uma lembrança… e mais coisas.</div>
+        </div>
+
+        <div class="row-between mt-8">
+          <div id="quiz-progress" class="pill">Fase 1 de 4</div>
+          <div id="save-indicator" class="muted tiny"></div>
+        </div>
+
+        <div id="quiz-steps" class="quiz"></div>
+        <div id="quiz-feedback" class="feedback" aria-live="polite"></div>
+
+        <div id="memories" class="memories"></div>
+      </section>
+
+      <section id="extras" class="panel hidden">
+        <div class="panel-head">
+          <h3>🧩 Extras desbloqueados</h3>
+          <div class="muted tiny">Agora você pode ir e voltar — o progresso fica salvo.</div>
+        </div>
+        <ul id="extra-links" class="linklist"></ul>
+      </section>
+
+      <footer class="footer">
+        <div class="muted tiny">Feito com carinho (e um pouco de zoeira). 💞</div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Easter egg discreto -->
+  <button id="egg-button" class="egg" type="button" title="Psst…">✦</button>
+  <div id="egg-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button id="close-egg" class="modal-close" type="button" aria-label="Fechar">×</button>
+      <h3>Você achou um easter egg 😳</h3>
+      <p>Vale 1 beijinho extra (resgatável a qualquer momento).</p>
+    </div>
+  </div>
+
+  <!-- música de fundo (troque o arquivo em assets/audio/bgm.mp3) -->
+  <audio id="bgm" src="assets/audio/bgm.mp3" loop preload="auto"></audio>
+
+  <script src="assets/js/state.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
