@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Galeria de Memórias</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria - Impostômetro do Amor</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/state.js"></script>
+  <script defer src="assets/js/gallery.js"></script>
 </head>
 <body>
   <header>
-    <h1>Galeria de Memórias</h1>
+    <h1>Nossa Galeria</h1>
     <nav>
-      <a href="index.html">Voltar</a>
+      <a href="index.html">Início</a>
     </nav>
   </header>
-  <main>
-    <div id="gallery-lock" class="lock-message hidden">Galeria ainda não desbloqueada. Complete o quiz ou insira o código secreto!</div>
-    <div id="gallery-content" class="hidden">
-      <h2>Nossas Fotos e Momentos</h2>
-      <p>Um contador simbólico de anexos / colagens: <span id="gallery-count">0</span></p>
-      <div class="media-grid" id="media-grid">
-        <!-- Placeholder images -->
-        <img src="assets/media/placeholder1.jpg" alt="Foto 1" class="media-item" />
-        <img src="assets/media/placeholder2.jpg" alt="Foto 2" class="media-item" />
-      </div>
-    </div>
+  <main class="gallery-container">
+    <p>Aqui você pode adicionar fotos, colagens e GIFs que você quiser. Substitua os arquivos em <code>assets/media</code> para personalizar a galeria.</p>
+    <div id="gallery" class="gallery-grid"></div>
   </main>
-  <script type="module" src="assets/js/gallery.js?v=5"></script>
 </body>
 </html>

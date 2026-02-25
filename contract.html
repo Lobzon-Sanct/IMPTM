@@ -1,40 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contrato do Amor</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrato de Amor</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/state.js"></script>
+  <script defer src="assets/js/contract.js"></script>
 </head>
 <body>
   <header>
-    <h1>Contrato do Amor</h1>
+    <h1>Contrato de Amor</h1>
     <nav>
-      <a href="index.html">Voltar</a>
+      <a href="index.html">Início</a>
     </nav>
   </header>
-  <main>
-    <div id="contract-lock" class="lock-message hidden">Contrato ainda não desbloqueado. Complete o quiz para liberar!</div>
-    <div id="contract-content" class="hidden">
-      <h2>Número de Anexos e Revisões do Contrato: <span id="contract-count">0</span></h2>
-      <div id="contract-section">
-        <!-- If signed, show download link. Otherwise, show canvas for signature. -->
-        <div id="signed-message" class="hidden">
-          <p>Contrato assinado! Você pode baixar o PDF agora.</p>
-          <a href="assets/docs/contrato.pdf" download>Baixar Contrato</a>
-        </div>
-        <div id="signature-area">
-          <p>Assine abaixo para concluir:</p>
-          <canvas id="signature-canvas" width="500" height="200" class="signature-canvas"></canvas>
-          <div class="signature-controls">
-            <button id="clear-signature">Limpar</button>
-            <button id="confirm-signature">Confirmar Assinatura</button>
-          </div>
-        </div>
-      </div>
+  <main class="contract-container">
+    <p>Assine abaixo para oficializar nosso contrato de relacionamento eterno. 😊</p>
+    <canvas id="signature-pad" width="500" height="200" class="signature-canvas"></canvas>
+    <div class="signature-actions">
+      <button id="clear-signature">Limpar</button>
+      <button id="save-signature">Salvar Assinatura</button>
+    </div>
+    <div id="signature-feedback" class="signature-feedback"></div>
+    <div id="download-section" class="hidden download-section">
+      <p>Assinatura salva! Agora você pode baixar o contrato:</p>
+      <a id="download-contract" href="assets/docs/contrato.pdf" download>Baixar Contrato</a>
     </div>
   </main>
-  <script type="module" src="assets/js/contract.js?v=5"></script>
 </body>
 </html>

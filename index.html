@@ -1,84 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Impostômetro do Amor</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/state.js"></script>
+  <script defer src="assets/js/script.js"></script>
 </head>
 <body>
-  <!-- Lock Screen -->
+  <!-- Tela de bloqueio -->
   <div id="lock-screen" class="lock-screen">
-    <div class="lock-container">
-      <h1>🔒 Acesso Exclusivo</h1>
-      <p class="lock-text">Digite o apelido carinhoso para desbloquear.</p>
-      <input type="password" id="lock-input" placeholder="apelido..." />
-      <button id="lock-button">Entrar</button>
-      <p id="lock-error" class="error"></p>
-    </div>
+    <h1>Bem-vinda ♥</h1>
+    <p>Digite a senha romântica para entrar:</p>
+    <input id="lock-input" type="password" placeholder="Sua senha...">
+    <button id="lock-button">Entrar</button>
+    <div id="lock-error" class="error"></div>
   </div>
 
-  <div id="app" class="hidden">
+  <!-- Aplicação principal -->
+  <div id="app" class="hidden app-container">
     <header>
-      <h1>Impostômetro do Amor ❤️</h1>
+      <h1>Impostômetro do Amor</h1>
     </header>
-    <main>
-      <!-- Impostômetro -->
-      <section class="impostometer">
-        <h2>Nosso Impostômetro do Amor</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>Dias de História</h3>
-            <p id="days-count">0</p>
-          </div>
-          <div class="card">
-            <h3>Horas de Conversa</h3>
-            <p id="hours-count">0</p>
-          </div>
-          <div class="card">
-            <h3>“Eu te amo” Enviados</h3>
-            <p id="love-count">0</p>
-          </div>
-          <div class="card">
-            <h3>Planos Malucos Juntos</h3>
-            <p id="plans-count">0</p>
-          </div>
-        </div>
-        <small>Esses números são simbólicos e aumentam com o tempo ❤️</small>
-      </section>
+    <section class="impostometro">
+      <div class="card">
+        <h2>Dias Juntos</h2>
+        <p id="days-count">0</p>
+      </div>
+      <div class="card">
+        <h2>Horas de Histórias</h2>
+        <p id="hours-count">0</p>
+      </div>
+      <div class="card">
+        <h2>Te amo enviados</h2>
+        <p id="love-count">0</p>
+      </div>
+      <div class="card hidden" id="hate-card">
+        <h2>Te odeio & Idiota</h2>
+        <p id="hate-count">0</p>
+      </div>
+    </section>
 
-      <!-- Quiz -->
-      <section class="quiz">
-      <h2>Missão: Destravar nossas memórias</h2>
-      <p id="quiz-progress"></p>
+    <section id="quiz-section" class="quiz">
+      <h2>Quiz de Memórias</h2>
+      <p id="quiz-progress">Fase 1 de 4</p>
       <div id="quiz-steps"></div>
       <div id="quiz-feedback" class="feedback"></div>
-      <div id="memories"></div>
-      </section>
+    </section>
 
-      <!-- Extra Pages Links (hidden until unlocked) -->
-      <section id="extra-section" class="hidden extra-section">
-        <h2>Extras Desbloqueados</h2>
-        <ul id="extra-links"></ul>
-      </section>
-    </main>
+    <section id="memories" class="memories"></section>
 
-    <!-- Easter egg modal -->
-    <div id="egg-modal" class="egg-modal hidden">
-      <div class="egg-content">
-        <button id="close-egg">X</button>
-        <h3>Você encontrou um Easter Egg!</h3>
-        <p>Vale um beijo extra 😊</p>
+    <!-- Seção extra com links liberados -->
+    <section id="extra-section" class="hidden extras">
+      <h2>Mais Surpresas</h2>
+      <ul id="extra-links"></ul>
+    </section>
+
+    <!-- Easter egg: botão oculto no canto da página -->
+    <button id="egg-button" class="egg">?</button>
+    <div id="egg-modal" class="modal hidden">
+      <div class="modal-content">
+        <span id="close-egg" class="close">&times;</span>
+        <h2>Parabéns, você encontrou um segredinho!</h2>
+        <p>Você é meu player 1 para sempre. ❤️</p>
       </div>
     </div>
-
-    <footer>
-      <p>Feito com carinho 💖</p>
-      <button id="egg-button" class="invisible-button">💖</button>
-    </footer>
   </div>
-  <!-- cache-bust: aumente o v= quando alterar JS e quiser forçar atualização imediata -->
-  <script type="module" src="assets/js/script.js?v=5"></script>
 </body>
 </html>

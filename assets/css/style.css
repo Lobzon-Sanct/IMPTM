@@ -1,202 +1,280 @@
+/* Estilo principal para o Impostômetro do Amor */
+
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #f8f6fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fdf6f0; /* tom pastel suave */
   color: #333;
-  line-height: 1.6;
+}
+
+a {
+  color: #6c63ff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+header {
+  background: #ffe6e6;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 4px solid #ffd1d1;
+}
+
+header nav a {
+  margin: 0 10px;
+}
+
+.app-container {
+  padding: 20px;
 }
 
 .hidden {
   display: none;
 }
 
-header, footer {
-  text-align: center;
-  padding: 1em;
-}
-
-h1, h2, h3 {
-  color: #574f7d;
-}
-
-main {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-}
-
-/* Lock screen */
 .lock-screen {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 999;
-  color: #fff;
-}
-.lock-container {
   text-align: center;
-  background-color: #fff;
-  padding: 2em;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  color: #333;
+  padding: 20px;
+  z-index: 100;
 }
-.lock-container input {
-  padding: 0.5em;
-  border-radius: 5px;
+
+.lock-screen input {
+  padding: 10px;
+  font-size: 16px;
   border: 1px solid #ccc;
-  width: 200px;
+  border-radius: 5px;
+  margin-top: 10px;
 }
-.lock-container button {
-  margin-left: 0.5em;
-  padding: 0.5em 1em;
+.lock-screen button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #6c63ff;
+  color: white;
   border: none;
   border-radius: 5px;
-  background-color: #a68dad;
-  color: #fff;
   cursor: pointer;
 }
-.lock-container .error {
-  color: #e74c3c;
+.lock-screen .error {
+  color: #c0392b;
+  margin-top: 10px;
 }
 
-/* Impostometer */
-.impostometer .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1em;
+.impostometro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
 }
-.impostometer .card {
-  background-color: #efecf5;
+
+.card {
+  flex: 1 1 200px;
+  background: #fffaf0;
+  border: 2px solid #fae3e3;
   border-radius: 10px;
-  padding: 1em;
+  padding: 15px;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.impostometer .card h3 {
-  margin: 0;
-  color: #7a6c97;
-}
-.impostometer .card p {
-  font-size: 1.5em;
-  margin: 0.5em 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Quiz */
-.quiz .feedback {
-  margin: 0.5em 0;
-  min-height: 1.5em;
+.card h2 {
+  margin-top: 0;
+  font-size: 1.2em;
 }
-.quiz .feedback.ok {
+
+.card p {
+  font-size: 2em;
+  margin: 10px 0 0;
+}
+
+.quiz {
+  margin-bottom: 30px;
+}
+
+#quiz-steps .quiz-step {
+  margin-bottom: 20px;
+  background: #f0f8ff;
+  border: 1px solid #d1e7f5;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+#quiz-steps input {
+  width: 70%;
+  padding: 8px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+#quiz-steps button {
+  padding: 8px 12px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.feedback {
+  font-weight: bold;
+  margin-top: 10px;
+}
+.feedback.ok {
   color: #27ae60;
 }
-.quiz .feedback.warm {
-  color: #e67e22;
+.feedback.warm {
+  color: #d35400;
 }
-.quiz .feedback.cold {
+.feedback.cold {
   color: #c0392b;
 }
-.quiz .memory-card {
-  background-color: #f0edf5;
-  border-radius: 8px;
-  padding: 1em;
-  margin: 0.5em 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+.memories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
-/* Extra Pages */
-.extra-section ul {
+.memory-card {
+  background: #fffff0;
+  border: 1px solid #f5e6cc;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.memory-card h3 {
+  margin-top: 0;
+  font-size: 1.1em;
+}
+
+.extras ul {
   list-style: none;
   padding: 0;
 }
-.extra-section li {
-  margin: 0.5em 0;
-}
-.extra-section a {
-  text-decoration: none;
-  color: #574f7d;
+.extras li {
+  margin-bottom: 10px;
 }
 
-/* Easter egg */
-.invisible-button {
-  background: none;
+.egg {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ffb3b3;
+  color: white;
   border: none;
-  color: transparent;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
   cursor: pointer;
 }
-.egg-modal {
+
+.modal {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0,0,0,0.8);
+  z-index: 200;
 }
-.egg-content {
-  background-color: #fff;
-  padding: 2em;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  position: relative;
-}
-.egg-content button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: none;
-  background: none;
-  font-size: 1.2em;
-  cursor: pointer;
-}
-
-/* Gallery */
-.media-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1em;
-}
-.media-item {
-  width: 100%;
-  height: auto;
+.modal-content {
+  background: white;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-.lock-message {
-  background-color: #fdeff4;
-  padding: 1em;
-  border-radius: 8px;
-  margin: 1em 0;
+  max-width: 400px;
   text-align: center;
-  color: #c0392b;
 }
-
-/* Sounds */
-.sound-grid {
-  display: flex;
-  gap: 1em;
-}
-.sound-button {
-  padding: 1em 2em;
-  border-radius: 8px;
-  border: none;
-  background-color: #d6c6eb;
+.modal .close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
   cursor: pointer;
 }
 
-/* Contract */
-.signature-canvas {
-  border: 2px dashed #7a6c97;
-  background-color: #fff;
+/* Galeria */
+.gallery-container {
+  padding: 20px;
 }
-.signature-controls button {
-  margin-right: 0.5em;
-  padding: 0.5em 1em;
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+.gallery-grid img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Soundboard */
+.sounds-container {
+  padding: 20px;
+  text-align: center;
+}
+.sound-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.sound-buttons button {
+  padding: 10px 20px;
+  background: #6c63ff;
+  color: white;
   border: none;
   border-radius: 5px;
-  background-color: #a68dad;
-  color: #fff;
   cursor: pointer;
+}
+
+/* Contrato */
+.contract-container {
+  padding: 20px;
+  text-align: center;
+}
+.signature-canvas {
+  border: 2px dashed #ccc;
+  background: #fff;
+  margin: 10px auto;
+  display: block;
+}
+.signature-actions button {
+  padding: 8px 15px;
+  margin: 5px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.signature-feedback {
+  margin-top: 10px;
+  font-weight: bold;
+}
+.download-section a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #6c63ff;
+  color: white;
+  border-radius: 5px;
 }
