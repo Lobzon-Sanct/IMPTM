@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeria de Memórias</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Galeria de Memórias</h1>
+    <nav>
+      <a href="index.html">Voltar</a>
+    </nav>
+  </header>
+  <main>
+    <div id="gallery-lock" class="lock-message hidden">Galeria ainda não desbloqueada. Complete o quiz ou insira o código secreto!</div>
+    <div id="gallery-content" class="hidden">
+      <h2>Nossas Fotos e Momentos</h2>
+      <p>Um contador simbólico de anexos / colagens: <span id="gallery-count">0</span></p>
+      <div class="media-grid" id="media-grid">
+        <!-- Placeholder images -->
+        <img src="assets/media/placeholder1.jpg" alt="Foto 1" class="media-item" />
+        <img src="assets/media/placeholder2.jpg" alt="Foto 2" class="media-item" />
+      </div>
+    </div>
+  </main>
+  <script src="assets/js/state.js"></script>
+  <script src="assets/js/gallery.js"></script>
+</body>
+</html>

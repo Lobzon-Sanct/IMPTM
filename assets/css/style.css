@@ -1,0 +1,202 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f6fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.hidden {
+  display: none;
+}
+
+header, footer {
+  text-align: center;
+  padding: 1em;
+}
+
+h1, h2, h3 {
+  color: #574f7d;
+}
+
+main {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+}
+
+/* Lock screen */
+.lock-screen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  color: #fff;
+}
+.lock-container {
+  text-align: center;
+  background-color: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  color: #333;
+}
+.lock-container input {
+  padding: 0.5em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+.lock-container button {
+  margin-left: 0.5em;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #a68dad;
+  color: #fff;
+  cursor: pointer;
+}
+.lock-container .error {
+  color: #e74c3c;
+}
+
+/* Impostometer */
+.impostometer .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1em;
+}
+.impostometer .card {
+  background-color: #efecf5;
+  border-radius: 10px;
+  padding: 1em;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.impostometer .card h3 {
+  margin: 0;
+  color: #7a6c97;
+}
+.impostometer .card p {
+  font-size: 1.5em;
+  margin: 0.5em 0;
+}
+
+/* Quiz */
+.quiz .feedback {
+  margin: 0.5em 0;
+  min-height: 1.5em;
+}
+.quiz .feedback.ok {
+  color: #27ae60;
+}
+.quiz .feedback.warm {
+  color: #e67e22;
+}
+.quiz .feedback.cold {
+  color: #c0392b;
+}
+.quiz .memory-card {
+  background-color: #f0edf5;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 0.5em 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Extra Pages */
+.extra-section ul {
+  list-style: none;
+  padding: 0;
+}
+.extra-section li {
+  margin: 0.5em 0;
+}
+.extra-section a {
+  text-decoration: none;
+  color: #574f7d;
+}
+
+/* Easter egg */
+.invisible-button {
+  background: none;
+  border: none;
+  color: transparent;
+  cursor: pointer;
+}
+.egg-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.8);
+}
+.egg-content {
+  background-color: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  position: relative;
+}
+.egg-content button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+/* Gallery */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1em;
+}
+.media-item {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.lock-message {
+  background-color: #fdeff4;
+  padding: 1em;
+  border-radius: 8px;
+  margin: 1em 0;
+  text-align: center;
+  color: #c0392b;
+}
+
+/* Sounds */
+.sound-grid {
+  display: flex;
+  gap: 1em;
+}
+.sound-button {
+  padding: 1em 2em;
+  border-radius: 8px;
+  border: none;
+  background-color: #d6c6eb;
+  cursor: pointer;
+}
+
+/* Contract */
+.signature-canvas {
+  border: 2px dashed #7a6c97;
+  background-color: #fff;
+}
+.signature-controls button {
+  margin-right: 0.5em;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #a68dad;
+  color: #fff;
+  cursor: pointer;
+}
