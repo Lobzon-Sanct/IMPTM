@@ -11,7 +11,18 @@ const SOUNDS = [
   // { label: 'Meme do casal', file: 'assets/audio/meme.mp3' },
 ];
 
+const soundVisuals = {
+  'assets/audio/som1.mp3': 'assets/media/exemplo-1.jpg',
+  'assets/audio/som2.mp3': 'assets/media/exemplo-2.jpg',
+  'assets/audio/som3.mp3': 'assets/media/exemplo-1.jpg',
+  'assets/audio/som4.mp3': 'assets/media/exemplo-2.jpg',
+  'assets/audio/som5.mp3': 'assets/media/exemplo-1.jpg',
+  'assets/audio/som6.mp3': 'assets/media/exemplo-2.jpg',
+  'assets/audio/som7.mp3': 'assets/media/exemplo-1.jpg'
+};
+
 let current = null;
+let visualWrap = null;
 
 async function guard(){
   const api = window.__LOVE_STATE__;
@@ -29,11 +40,36 @@ function stop(){
     current.currentTime = 0;
     current = null;
   }
+  clearVisual();
 }
 
-function playSound(file){
+function clearVisual(){
+  if(visualWrap){
+    visualWrap.innerHTML = '';
+  }
+}
+
+function renderVisual(file, label){
+  if(!visualWrap) return;
+
+  const visual = soundVisuals[file];
+  if(!visual){
+    clearVisual();
+    return;
+  }
+
+  visualWrap.innerHTML = '';
+  const img = document.createElement('img');
+  img.src = visual;
+  img.alt = label ? `Visual do ${label}` : 'Visual do som';
+  visualWrap.appendChild(img);
+}
+
+function playSound(file, label){
   stop();
+  renderVisual(file, label);
   current = new Audio(file);
+  current.addEventListener('ended', clearVisual);
   current.play().catch(()=>{});
 }
 
@@ -41,6 +77,7 @@ async function init(){
   await guard();
 
   const wrap = document.getElementById('soundboard');
+  visualWrap = document.getElementById('sound-visual');
   if(!wrap) return;
 
   SOUNDS.forEach(s=>{
@@ -48,7 +85,7 @@ async function init(){
     btn.className = 'btn btn-ghost';
     btn.type = 'button';
     btn.textContent = s.label;
-    btn.addEventListener('click', ()=> playSound(s.file));
+    btn.addEventListener('click', ()=> playSound(s.file, s.label));
     wrap.appendChild(btn);
   });
 

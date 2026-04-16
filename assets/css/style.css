@@ -222,6 +222,24 @@ body{
   width:100%;
   min-width:0;
 }
+.sound-visual{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:180px;
+  margin-top:18px;
+}
+.sound-visual img{
+  display:block;
+  width:100%;
+  max-width:300px;
+  max-height:300px;
+  object-fit:cover;
+  border-radius:16px;
+  border:1px solid #efe7ff;
+  box-shadow: 0 8px 25px rgba(17,24,39,.08);
+  background:white;
+}
 
 /* Contract */
 .sig{width:100%; max-width:720px; border-radius:14px; border:2px dashed #e5e7eb; background:white; display:block; margin:10px auto}
