@@ -212,8 +212,16 @@ body{
 .gallery-cap{padding:10px; font-size:12px; color:#4b5563}
 
 /* Soundboard */
-.soundboard{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
-.soundboard button{min-width:180px}
+.soundboard{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap:10px;
+  margin-top:12px;
+}
+.soundboard button{
+  width:100%;
+  min-width:0;
+}
 
 /* Contract */
 .sig{width:100%; max-width:720px; border-radius:14px; border:2px dashed #e5e7eb; background:white; display:block; margin:10px auto}

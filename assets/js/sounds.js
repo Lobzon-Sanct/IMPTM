@@ -3,6 +3,11 @@
 const SOUNDS = [
   { label: 'Som 1', file: 'assets/audio/som1.mp3' },
   { label: 'Som 2', file: 'assets/audio/som2.mp3' },
+  { label: 'Som 3', file: 'assets/audio/som3.mp3' },
+  { label: 'Som 4', file: 'assets/audio/som4.mp3' },
+  { label: 'Som 5', file: 'assets/audio/som5.mp3' },
+  { label: 'Som 6', file: 'assets/audio/som6.mp3' },
+  { label: 'Som 7', file: 'assets/audio/som7.mp3' },
   // { label: 'Meme do casal', file: 'assets/audio/meme.mp3' },
 ];
 
@@ -26,6 +31,12 @@ function stop(){
   }
 }
 
+function playSound(file){
+  stop();
+  current = new Audio(file);
+  current.play().catch(()=>{});
+}
+
 async function init(){
   await guard();
 
@@ -37,11 +48,7 @@ async function init(){
     btn.className = 'btn btn-ghost';
     btn.type = 'button';
     btn.textContent = s.label;
-    btn.addEventListener('click', ()=>{
-      stop();
-      current = new Audio(s.file);
-      current.play().catch(()=>{});
-    });
+    btn.addEventListener('click', ()=> playSound(s.file));
     wrap.appendChild(btn);
   });
 
