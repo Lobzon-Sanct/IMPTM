@@ -17,6 +17,7 @@ async function init(){
   const saveBtn = document.getElementById('save');
   const msg = document.getElementById('sig-msg');
   const dl = document.getElementById('download');
+  const downloadBtn = document.getElementById('download-btn');
   if(!canvas) return;
 
   const ctx = canvas.getContext('2d');
@@ -26,6 +27,14 @@ async function init(){
 
   let drawing = false;
   let hasInk = false;
+
+  function revealDownload(){
+    dl.classList.remove('hidden');
+    dl.classList.add('download-ready');
+    if(downloadBtn){
+      downloadBtn.setAttribute('aria-disabled', 'false');
+    }
+  }
 
   function start(e){
     drawing = true;
@@ -66,7 +75,7 @@ async function init(){
   if(api){
     const st = await api.loadState();
     if(st && st.signedContract){
-      dl.classList.remove('hidden');
+      revealDownload();
     }
   }
 
@@ -75,13 +84,17 @@ async function init(){
       msg.textContent = 'Assina primeiro 😅';
       return;
     }
-    msg.textContent = 'Assinatura salva!';
-    dl.classList.remove('hidden');
+    msg.textContent = 'Contrato selado 💍';
+    revealDownload();
 
     if(api){
       const st = await api.loadState();
       st.signedContract = true;
       await api.saveState(st);
+    }else{
+      try{
+        localStorage.setItem('couple_state_v1', JSON.stringify({ signedContract: true }));
+      }catch(e){}
     }
   });
 }

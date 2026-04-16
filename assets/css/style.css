@@ -244,3 +244,11 @@ body{
 /* Contract */
 .sig{width:100%; max-width:720px; border-radius:14px; border:2px dashed #e5e7eb; background:white; display:block; margin:10px auto}
 .download{margin-top:14px; padding:14px; border-radius:14px; border:1px solid #d1fae5; background:#ecfdf5}
+.download-ready{
+  animation: contractFade .35s ease;
+  box-shadow: 0 10px 24px rgba(16,185,129,.14);
+}
+@keyframes contractFade{
+  from{opacity:0; transform: translateY(8px)}
+  to{opacity:1; transform: translateY(0)}
+}
