@@ -211,12 +211,19 @@ function setupReset(){
   const btn = document.getElementById('reset-progress');
   if(!btn) return;
 
-  btn.addEventListener('click', ()=>{
+  btn.addEventListener('click', async ()=>{
     const confirmed = window.confirm('Tem certeza que deseja recomeçar nossa história? Isso vai apagar o progresso salvo neste navegador.');
     if(!confirmed) return;
 
     localStorage.clear();
-    window.alert('Progresso apagado com sucesso. Vamos começar de novo.');
+
+    if(typeof saveState === 'function'){
+      try{
+        await saveState({});
+      }catch(e){}
+    }
+
+    window.alert('Memória resetada');
     window.location.reload();
   });
 }
