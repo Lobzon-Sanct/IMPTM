@@ -170,6 +170,17 @@ body{
 .linklist a:hover{text-decoration:underline}
 
 .footer{padding:10px 0; text-align:center}
+.reset-link{
+  margin-top:10px;
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  font-size:12px;
+  text-decoration:underline;
+  cursor:pointer;
+  padding:4px 6px;
+}
+.reset-link:hover{color:var(--text)}
 
 /* Easter egg */
 .egg{
