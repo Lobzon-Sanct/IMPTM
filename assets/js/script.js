@@ -79,7 +79,7 @@ let STATE = {
   answers: [],
   pages: { gallery:false, sounds:false, contract:false },
   showHate:false,
-  mute:true,
+  mute:false,
   signedContract:false
 };
 
@@ -93,7 +93,7 @@ async function load(){
       STATE.answers = Array.isArray(STATE.answers) ? STATE.answers : [];
       STATE.unlockedSteps = Number(STATE.unlockedSteps || 0);
       STATE.showHate = !!STATE.showHate;
-      STATE.mute = STATE.mute !== false; // default true
+      STATE.mute = STATE.mute === true; // default false
     }
   }
 }
@@ -157,6 +157,18 @@ function setupMusic(){
   });
 
   render();
+}
+
+function setupBgmAutoplayAfterInteraction(){
+  const bgm = document.getElementById('bgm');
+  if(!bgm) return;
+
+  const playAudio = () => {
+    bgm.play().catch(()=>{});
+    document.removeEventListener('click', playAudio);
+  };
+
+  document.addEventListener('click', playAudio);
 }
 
 // ========= COUNTERS =========
@@ -390,6 +402,7 @@ async function init(){
   await load();
   setupLock();
   setupMusic();
+  setupBgmAutoplayAfterInteraction();
   setupCounters();
   setupQuiz();
   setupEasterEgg();
