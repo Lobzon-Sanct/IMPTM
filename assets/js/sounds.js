@@ -1,6 +1,7 @@
 // Soundboard: adicione/remova itens desta lista para mudar os botoes.
 
 const DEFAULT_VISUAL = 'assets/img/sound-visual.svg';
+const SOUND_ORDER_KEY = 'sound_order';
 
 const sounds = [
   { id: 'adoro-pipocas-picapau', title: 'Adoro Pipocas', file: 'assets/audio/adoro-pipocas-picapau.mp3', visual: DEFAULT_VISUAL },
@@ -79,6 +80,31 @@ function playSound(sound){
   current.play().catch(()=>{});
 }
 
+function getOrderedSounds(){
+  let savedOrder = [];
+
+  try{
+    savedOrder = JSON.parse(localStorage.getItem(SOUND_ORDER_KEY) || '[]');
+  }catch(e){
+    savedOrder = [];
+  }
+
+  if(!Array.isArray(savedOrder) || !savedOrder.length) return sounds;
+
+  const byId = new Map(sounds.map(sound => [sound.id, sound]));
+  const ordered = savedOrder.map(id => byId.get(id)).filter(Boolean);
+  const missing = sounds.filter(sound => !savedOrder.includes(sound.id));
+
+  return ordered.concat(missing);
+}
+
+function saveSoundOrder(wrap){
+  const order = Array.from(wrap.querySelectorAll('[data-sound-id]'))
+    .map(btn => btn.dataset.soundId);
+
+  localStorage.setItem(SOUND_ORDER_KEY, JSON.stringify(order));
+}
+
 function setupSortable(wrap){
   if(typeof Sortable === 'undefined') return;
 
@@ -88,7 +114,8 @@ function setupSortable(wrap){
     filter: '[data-action="stop"]',
     delayOnTouchOnly: true,
     delay: 120,
-    touchStartThreshold: 4
+    touchStartThreshold: 4,
+    onEnd: () => saveSoundOrder(wrap)
   });
 }
 
@@ -99,7 +126,7 @@ async function init(){
   visualWrap = document.getElementById('sound-visual');
   if(!wrap) return;
 
-  sounds.forEach(sound=>{
+  getOrderedSounds().forEach(sound=>{
     const btn = document.createElement('button');
     btn.className = 'btn btn-ghost';
     btn.type = 'button';
