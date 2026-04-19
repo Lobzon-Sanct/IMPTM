@@ -79,6 +79,19 @@ function playSound(sound){
   current.play().catch(()=>{});
 }
 
+function setupSortable(wrap){
+  if(typeof Sortable === 'undefined') return;
+
+  Sortable.create(wrap, {
+    animation: 150,
+    draggable: '[data-sound-id]',
+    filter: '[data-action="stop"]',
+    delayOnTouchOnly: true,
+    delay: 120,
+    touchStartThreshold: 4
+  });
+}
+
 async function init(){
   await guard();
 
@@ -99,9 +112,12 @@ async function init(){
   const stopBtn = document.createElement('button');
   stopBtn.className = 'btn';
   stopBtn.type = 'button';
+  stopBtn.dataset.action = 'stop';
   stopBtn.textContent = 'Parar';
   stopBtn.addEventListener('click', stop);
   wrap.appendChild(stopBtn);
+
+  setupSortable(wrap);
 }
 
 document.addEventListener('DOMContentLoaded', init);
