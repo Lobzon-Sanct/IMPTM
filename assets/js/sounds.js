@@ -31,6 +31,7 @@ const sounds = [
 
 let current = null;
 let visualWrap = null;
+let sortableInstance = null;
 
 async function guard(){
   const api = window.__LOVE_STATE__;
@@ -107,8 +108,9 @@ function saveSoundOrder(wrap){
 
 function setupSortable(wrap){
   if(typeof Sortable === 'undefined') return;
+  if(sortableInstance) sortableInstance.destroy();
 
-  Sortable.create(wrap, {
+  sortableInstance = Sortable.create(wrap, {
     animation: 150,
     draggable: '[data-sound-id]',
     filter: '[data-action="stop"]',
@@ -119,12 +121,8 @@ function setupSortable(wrap){
   });
 }
 
-async function init(){
-  await guard();
-
-  const wrap = document.getElementById('soundboard');
-  visualWrap = document.getElementById('sound-visual');
-  if(!wrap) return;
+function renderSoundboard(wrap){
+  wrap.innerHTML = '';
 
   getOrderedSounds().forEach(sound=>{
     const btn = document.createElement('button');
@@ -145,6 +143,28 @@ async function init(){
   wrap.appendChild(stopBtn);
 
   setupSortable(wrap);
+}
+
+function setupResetSoundOrder(wrap){
+  const btn = document.getElementById('reset-sound-order');
+  if(!btn) return;
+
+  btn.addEventListener('click', ()=>{
+    localStorage.removeItem(SOUND_ORDER_KEY);
+    stop();
+    renderSoundboard(wrap);
+  });
+}
+
+async function init(){
+  await guard();
+
+  const wrap = document.getElementById('soundboard');
+  visualWrap = document.getElementById('sound-visual');
+  if(!wrap) return;
+
+  renderSoundboard(wrap);
+  setupResetSoundOrder(wrap);
 }
 
 document.addEventListener('DOMContentLoaded', init);
