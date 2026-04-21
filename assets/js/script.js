@@ -218,7 +218,6 @@ function setupMusic(){
   const btn = document.getElementById('mute-btn');
   const bgm = document.getElementById('bgm');
   if(!btn || !bgm) return;
-
   function render(){
     btn.textContent = STATE.mute ? '🔇' : '🔊';
     btn.title = STATE.mute ? 'Ativar música' : 'Mutar música';
@@ -381,6 +380,29 @@ function setupQuiz(){
     return { type:'cold', text:'Tá frio 😅 tenta outra resposta.' };
   }
 
+
+
+  
+  function showNextStep(currentStep){
+    const next = stepsWrap.querySelector(`[data-step="${currentStep + 1}"]`);
+    if(next){
+      next.style.display = 'block';
+    }
+  }
+
+  function lockStep(stepIndex){
+    const step = stepsWrap.querySelector(`[data-step="${stepIndex}"]`);
+    if(!step) return;
+
+    const input = step.querySelector('input');
+    const button = step.querySelector('button');
+
+    if(input) input.disabled = true;
+    if(button){
+      button.innerText = '✔';
+      button.disabled = true;
+    }
+  }
   function render(){
     stepsWrap.innerHTML = '';
 
@@ -390,7 +412,9 @@ function setupQuiz(){
 
     QUIZ_STEPS.forEach((step, idx)=>{
       const box = document.createElement('div');
-      box.className = 'quiz-step';
+      box.className = 'quiz-step quiz-item';
+      box.dataset.step = String(idx);
+      box.style.display = idx <= current ? 'block' : 'none';
 
       const q = document.createElement('p');
       q.className = 'quiz-q';
@@ -425,7 +449,12 @@ function setupQuiz(){
         btn.textContent = 'Bloqueado';
         btn.disabled = true;
       }
-
+      input.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter'){
+          e.preventDefault();
+          btn.click();
+        }
+      });
       btn.addEventListener('click', async ()=>{
         if(idx !== STATE.unlockedSteps) return;
         const ans = input.value || '';
@@ -443,7 +472,7 @@ function setupQuiz(){
         if(fb.type === 'ok'){
           // salva e desbloqueia
           STATE.answers[idx] = ans.trim();
-          STATE.unlockedSteps = STATE.unlockedSteps + 1;
+          STATE.unlockedSteps = Math.min(STATE.unlockedSteps + 1, QUIZ_STEPS.length);
 
           // desbloqueios por etapa
           if(step.id === 1) STATE.pages.gallery = true;
@@ -452,6 +481,8 @@ function setupQuiz(){
           if(step.id === 4) STATE.showHate = true;
 
           await save();
+          lockStep(idx);
+          showNextStep(idx);
           render();
           renderMemories();
           renderExtras();
