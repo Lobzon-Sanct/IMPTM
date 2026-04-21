@@ -25,8 +25,15 @@ const QUIZ_STEPS = [
   {
     id: 1,
     question: "Onde nos conhecemos pela primeira vez?",
-    hint: "Dica: Discord? Warface? algo assim...",
-    acceptedAnswers: ["discord", "warface", "jogando", "clã"],
+    hint: "Dica: Foi no digital… mas virou algo bem real.",
+    acceptedAnswers: [
+      "discord",
+      "warface",
+      "jogando",
+      "clã",
+      "clan",
+      "call"
+    ],
     memoryTitle: "Começo de tudo",
     memoryText: "Nossa história começou ali... e o resto é só consequência. 💗"
   },
@@ -35,38 +42,104 @@ const QUIZ_STEPS = [
     id: 2,
     question: "Qual é o nosso game favorito de casal?",
     hint: "Dica: Jogos ou Games?",
-    acceptedAnswers: ["warface", "party animals", "sinuca", "qualquer um com você"],
+    acceptedAnswers: [
+      "warface",
+      "party animals",
+      "sinuca",
+      "it takes two",
+      "it takes two game",
+
+      "colaboracao",
+      "colaboração",
+      "colaboretion",
+      "colaboreixon",
+      "coop",
+      "cooperativo",
+      "cooperacao",
+      "cooperação",
+
+      "cody",
+      "may",
+
+      "qualquer um com você",
+      "qualquer jogo",
+      "qualquer game",
+      "com você"
+    ],
     memoryTitle: "Nosso jogo favorito",
-    memoryText: "Não importa o jogo… se for com você, já é vitória. 🎮"
+    memoryText: "A gente pode jogar qualquer coisa... mas quando é junto, vira outra coisa. 🎮💜"
   },
 
   {
     id: 3,
     question: "Qual foi a viagem/rolê mais inesquecível que iremos fazer?",
-    hint: "Dica: Foz? cataratas? talvez algo assim...",
-    acceptedAnswers: ["foz", "foz do iguaçu", "cataratas", "me ver", "me visitar"],
+    hint: "Dica: Ainda não aconteceu… mas já mora na cabeça.",
+    acceptedAnswers: [
+      "foz",
+      "foz do iguaçu",
+      "cataratas",
+      "me ver",
+      "me visitar",
+      "te ver",
+      "te visitar"
+    ],
     memoryTitle: "Viagem inesquecível",
-    memoryText: "Ainda não aconteceu… mas já é inesquecível só de imaginar com você. 🌍"
+    memoryText: "Ainda não aconteceu... mas já é inesquecível só de imaginar com você. 🌍"
   },
 
   {
     id: 4,
     question: "Quantos “te odeio / te mato / idiota” você já disse?",
     hint: "Dica: Quantas estrelas existem no brilho dos seus olhos?",
-    acceptedAnswers: ["muitos", "∞", "infinitos", "mais que dois", "não o suficiente", "poucos"],
+    acceptedAnswers: [
+      "muitos",
+      "∞",
+      "infinito",
+      "infinitos",
+      "mais que dois",
+      "não o suficiente",
+      "nao o suficiente",
+      "poucos",
+      "nenhum",
+      "nada",
+      "nunca",
+      "nunca falei",
+      "nunca disse"
+    ],
     memoryTitle: "Bravinha (Reação explosiva de Na/CL+OD-io-nizado)",
-    memoryText: "Você fala, eu rio… e no fim a gente se ama igual. 😏💗"
+    memoryText: "Você fala, eu rio... e no fim a gente se ama igual. 😏💗"
   }
 ];
 
 // ========= HELPERS =========
-function norm(s){
-  return (s || '')
+function normalizeText(text){
+  return (text || '')
     .toString()
-    .trim()
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g,'');
+    .replace(/[\u0300-\u036f]/g,'')
+    .trim();
+}
+
+function norm(s){
+  return normalizeText(s);
+}
+
+function isAnswerCorrect(userAnswer, acceptedAnswers){
+  const normalizedUser = normalizeText(userAnswer);
+
+  return acceptedAnswers.some(answer =>
+    normalizeText(answer) === normalizedUser
+  );
+}
+
+function updatePhase(currentStep){
+  const phaseEl = document.getElementById('quiz-progress');
+  if(!phaseEl) return;
+
+  const totalSteps = QUIZ_STEPS.length;
+  const safeStep = Math.min(currentStep + 1, totalSteps);
+  phaseEl.innerText = `Fase ${safeStep} de ${totalSteps}`;
 }
 
 function setSaveIndicator(text){
@@ -299,7 +372,7 @@ function setupQuiz(){
     const list = accepted.map(norm);
 
     // match exato
-    if(list.includes(a)) return { type:'ok', text:'Perfeito! Você acertou ❤️' };
+    if(isAnswerCorrect(ans, accepted)) return { type:'ok', text:'Perfeito! Você acertou ❤️' };
 
     // "quente" se for substring de algum accepted ou vice-versa
     const warm = list.some(x => x.includes(a) || a.includes(x));
@@ -313,7 +386,7 @@ function setupQuiz(){
 
     const totalSteps = QUIZ_STEPS.length;
     const current = Math.min(STATE.unlockedSteps, totalSteps);
-    progress.textContent = `Fase ${Math.min(current + 1, totalSteps)} de ${totalSteps}`;
+    updatePhase(current);
 
     QUIZ_STEPS.forEach((step, idx)=>{
       const box = document.createElement('div');
