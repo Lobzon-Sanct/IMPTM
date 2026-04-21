@@ -155,14 +155,22 @@ body{
 .feedback.cold{color:#ef4444}
 
 .memories{margin-top:12px; display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:10px}
-.memory{
+.memory,
+.memory-card{
   border:1px solid #efe7ff;
   background: rgba(255,255,255,.75);
   border-radius:14px;
   padding:12px;
 }
-.memory h4{margin:0 0 6px; font-size:14px}
-.memory p{margin:0; color:#4b5563; font-size:12px; line-height:1.4}
+.memory-card{
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin-top: 10px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.memory h4,.memory-card h4{margin:0 0 6px; font-size:14px}
+.memory p,.memory-card p{margin:0; color:#4b5563; font-size:12px; line-height:1.4}
 
 .linklist{list-style:none; padding-left:0; margin:12px 0 0}
 .linklist li{margin:8px 0}

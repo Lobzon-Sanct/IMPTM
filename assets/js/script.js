@@ -24,35 +24,38 @@ const PLANS_EVERY_SEC = 10; // +1 plano a cada 10s
 const QUIZ_STEPS = [
   {
     id: 1,
-    question: 'Onde nos conhecemos pela primeira vez?',
-    hint: 'Dica: uma resposta curta já resolve (ex: “escola”).',
-    accepted: ['escola', 'na escola', 'colégio', 'colegio'],
-    memoryTitle: 'Começo de tudo',
-    memoryText: 'Nossa história começou ali… e o resto é só consequência. 💗'
+    question: "Onde nos conhecemos pela primeira vez?",
+    hint: "Dica: Discord? Warface? algo assim...",
+    acceptedAnswers: ["discord", "warface", "jogando", "clã"],
+    memoryTitle: "Começo de tudo",
+    memoryText: "Nossa história começou ali... e o resto é só consequência. 💗"
   },
+
   {
     id: 2,
-    question: 'Qual é a nossa comida favorita de casal?',
-    hint: 'Dica: pode ser “pizza”, “sushi”… você decide aqui.',
-    accepted: ['pizza', 'sushi', 'hamburguer', 'hambúrguer', 'hamburger'],
-    memoryTitle: 'Nosso prato preferido',
-    memoryText: 'Dois garfos, uma risada, e o mundo ficando leve. 🍕'
+    question: "Qual é o nosso game favorito de casal?",
+    hint: "Dica: Jogos ou Games?",
+    acceptedAnswers: ["warface", "party animals", "sinuca", "qualquer um com você"],
+    memoryTitle: "Nosso jogo favorito",
+    memoryText: "Não importa o jogo… se for com você, já é vitória. 🎮"
   },
+
   {
     id: 3,
-    question: 'Qual foi a viagem/rolê mais inesquecível que fizemos?',
-    hint: 'Dica: pode ser um lugar (ex: “foz”), ou algo tipo “praia”.',
-    accepted: ['foz', 'foz do iguacu', 'foz do iguaçu', 'praia', 'rio', 'montanha'],
-    memoryTitle: 'Viagem inesquecível',
-    memoryText: 'Tem lugares que viram “casa” quando você tá comigo. 🧳'
+    question: "Qual foi a viagem/rolê mais inesquecível que iremos fazer?",
+    hint: "Dica: Foz? cataratas? talvez algo assim...",
+    acceptedAnswers: ["foz", "foz do iguaçu", "cataratas", "me ver", "me visitar"],
+    memoryTitle: "Viagem inesquecível",
+    memoryText: "Ainda não aconteceu… mas já é inesquecível só de imaginar com você. 🌍"
   },
+
   {
     id: 4,
-    question: 'Quantos “te odeio / te mato / idiota” você já disse?',
-    hint: 'Resposta válida: “muitos”, “∞”, “mais que dois”…',
-    accepted: ['muitos', 'infinito', 'infinitos', '∞', 'mais que dois', 'pra cacete', 'nao o suficiente', 'não o suficiente'],
-    memoryTitle: 'Bravinha (mentira)',
-    memoryText: 'Você fala, eu rio… e a gente se ama igual. 😌'
+    question: "Quantos “te odeio / te mato / idiota” você já disse?",
+    hint: "Dica: Quantas estrelas existem no brilho dos seus olhos?",
+    acceptedAnswers: ["muitos", "∞", "infinitos", "mais que dois", "não o suficiente", "poucos"],
+    memoryTitle: "Bravinha (Reação explosiva de Na/CL+OD-io-nizado)",
+    memoryText: "Você fala, eu rio… e no fim a gente se ama igual. 😏💗"
   }
 ];
 
@@ -91,7 +94,7 @@ async function load(){
       // garante estrutura
       STATE.pages = Object.assign({gallery:false,sounds:false,contract:false}, STATE.pages || {});
       STATE.answers = Array.isArray(STATE.answers) ? STATE.answers : [];
-      STATE.unlockedSteps = Number(STATE.unlockedSteps || 0);
+      STATE.unlockedSteps = Math.min(Number(STATE.unlockedSteps || 0), QUIZ_STEPS.length);
       STATE.showHate = !!STATE.showHate;
       STATE.mute = STATE.mute === true; // default false
     }
@@ -280,7 +283,7 @@ function setupQuiz(){
     for(let i=0; i<STATE.unlockedSteps; i++){
       const step = QUIZ_STEPS[i];
       const card = document.createElement('div');
-      card.className = 'memory';
+      card.className = 'memory-card';
       const h = document.createElement('h4');
       h.textContent = step.memoryTitle;
       const p = document.createElement('p');
@@ -308,8 +311,9 @@ function setupQuiz(){
   function render(){
     stepsWrap.innerHTML = '';
 
-    const current = Math.min(STATE.unlockedSteps, QUIZ_STEPS.length);
-    progress.textContent = `Fase ${current + 1} de ${QUIZ_STEPS.length}`;
+    const totalSteps = QUIZ_STEPS.length;
+    const current = Math.min(STATE.unlockedSteps, totalSteps);
+    progress.textContent = `Fase ${Math.min(current + 1, totalSteps)} de ${totalSteps}`;
 
     QUIZ_STEPS.forEach((step, idx)=>{
       const box = document.createElement('div');
@@ -358,7 +362,8 @@ function setupQuiz(){
           return;
         }
 
-        const fb = feedbackQuenteFrio(ans, step.accepted);
+        const acceptedAnswers = step.acceptedAnswers || step.accepted || [];
+        const fb = feedbackQuenteFrio(ans, acceptedAnswers);
         feedback.className = 'feedback ' + fb.type;
         feedback.textContent = fb.text;
 
