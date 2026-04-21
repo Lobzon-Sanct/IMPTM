@@ -3,6 +3,7 @@
 
 // ========= CONFIG =========
 const LOCK_PASS = 'pole'; // <-- troque aqui (sem acento, minúsculo recomendado)
+const LOCK_STORAGE_KEY = 'imptm_unlocked';
 const START_DATE = new Date('2015-01-01T00:00:00');
 
 // contadores mínimos (iniciais)
@@ -188,6 +189,20 @@ async function save(){
 }
 
 // ========= LOCK =========
+function unlockSite(){
+  const screen = document.getElementById('lock-screen');
+  const app = document.getElementById('app');
+  if(screen) screen.classList.add('hidden');
+  if(app) app.classList.remove('hidden');
+}
+
+function lockSite(){
+  const screen = document.getElementById('lock-screen');
+  const app = document.getElementById('app');
+  if(screen) screen.classList.remove('hidden');
+  if(app) app.classList.add('hidden');
+}
+
 function setupLock(){
   const screen = document.getElementById('lock-screen');
   const app = document.getElementById('app');
@@ -195,11 +210,17 @@ function setupLock(){
   const btn = document.getElementById('lock-button');
   const err = document.getElementById('lock-error');
 
+  if(localStorage.getItem(LOCK_STORAGE_KEY) === 'true'){
+    unlockSite();
+  }else{
+    lockSite();
+  }
+
   function tryUnlock(){
     const typed = norm(input.value);
     if(typed && typed === norm(LOCK_PASS)){
-      screen.classList.add('hidden');
-      app.classList.remove('hidden');
+      localStorage.setItem(LOCK_STORAGE_KEY, 'true');
+      unlockSite();
       err.textContent = '';
       // música: tenta tocar, mas respeita autoplay (muitos browsers bloqueiam)
       const bgm = document.getElementById('bgm');
