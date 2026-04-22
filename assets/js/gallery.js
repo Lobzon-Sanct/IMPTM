@@ -37,6 +37,9 @@ const MEDIA = [
   { type: 'video', file: 'https://pub-4a8ba770d5154e8682abe06d3de4cb33.r2.dev/traeseirox1.mp4', caption: 'Vou te Matar' }
 ];
 
+const GALLERY_ORDER_KEY = 'gallery_order';
+let sortableInstance = null;
+
 function el(tag, cls){
   const x = document.createElement(tag);
   if(cls) x.className = cls;
@@ -72,26 +75,84 @@ function createMediaElement(item){
   return img;
 }
 
-async function init(){
-  await guard();
-  const grid = document.getElementById('gallery-grid');
-  if(!grid) return;
+function getOrderedMedia(){
+  let savedOrder = [];
+
+  try{
+    savedOrder = JSON.parse(localStorage.getItem(GALLERY_ORDER_KEY) || '[]');
+  }catch(e){
+    savedOrder = [];
+  }
+
+  if(!Array.isArray(savedOrder) || !savedOrder.length) return MEDIA;
+
+  const byFile = new Map(MEDIA.map(item => [item.file, item]));
+  const ordered = savedOrder.map(file => byFile.get(file)).filter(Boolean);
+  const missing = MEDIA.filter(item => !savedOrder.includes(item.file));
+
+  return ordered.concat(missing);
+}
+
+function saveGalleryOrder(grid){
+  const order = Array.from(grid.querySelectorAll('[data-media-id]'))
+    .map(item => item.dataset.mediaId);
+
+  localStorage.setItem(GALLERY_ORDER_KEY, JSON.stringify(order));
+}
+
+function setupSortable(grid){
+  if(typeof Sortable === 'undefined') return;
+  if(sortableInstance) sortableInstance.destroy();
+
+  sortableInstance = Sortable.create(grid, {
+    animation: 150,
+    draggable: '[data-media-id]',
+    delayOnTouchOnly: true,
+    delay: 120,
+    touchStartThreshold: 4,
+    onEnd: () => saveGalleryOrder(grid)
+  });
+}
+
+function renderGallery(grid){
+  grid.innerHTML = '';
 
   if(!MEDIA.length){
     grid.innerHTML = '<p class="muted">Nenhuma mídia listada ainda.</p>';
     return;
   }
 
-  MEDIA.forEach(m=>{
+  getOrderedMedia().forEach(m=>{
     const item = el('div','gallery-item');
     const media = createMediaElement(m);
     const cap = el('div','gallery-cap');
 
+    item.dataset.mediaId = m.file;
     cap.textContent = m.caption || '';
     item.appendChild(media);
     item.appendChild(cap);
     grid.appendChild(item);
   });
+
+  setupSortable(grid);
 }
 
+function setupResetGalleryOrder(grid){
+  const btn = document.getElementById('reset-gallery-order');
+  if(!btn) return;
+
+  btn.addEventListener('click', ()=>{
+    localStorage.removeItem(GALLERY_ORDER_KEY);
+    renderGallery(grid);
+  });
+}
+
+async function init(){
+  await guard();
+  const grid = document.getElementById('gallery-grid');
+  if(!grid) return;
+
+  renderGallery(grid);
+  setupResetGalleryOrder(grid);
+}
 document.addEventListener('DOMContentLoaded', init);
