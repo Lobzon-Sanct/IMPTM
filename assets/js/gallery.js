@@ -26,7 +26,15 @@ const MEDIA = [
   { type: 'img', file: 'assets/media/podio sim.jpg', caption: 'Podio Sim' },
   { type: 'img', file: 'assets/media/podio x.jpg', caption: 'Podio X' },
   { type: 'img', file: 'assets/media/soquinho podio.jpg', caption: 'Soquinho Podio' },
-  { type: 'img', file: 'assets/media/vemk podio.jpg', caption: 'Vemk Podio' }
+  { type: 'img', file: 'assets/media/vemk podio.jpg', caption: 'Vemk Podio' },
+  { type: 'video', file: 'https://pub-4a8ba770d5154e8682abe06d3de4cb33.r2.dev/hello.mp4', caption: 'Hello Hii 🥰' },
+  { type: 'video', file: 'https://pub-4a8ba770d5154e8682abe06d3de4cb33.r2.dev/comeca%20com%20s.mp4', caption: 'Começa Com S' },
+  { type: 'video', file: 'https://pub-4a8ba770d5154e8682abe06d3de4cb33.r2.dev/ela%20e%20tudo%20isso.mp4', caption: 'Pole💕' },
+  { type: 'video', file: 'https://pub-4a8ba770d5154e8682abe06d3de4cb33.r2.dev/gabiel%20ne.mp4', caption: 'Gabriel Né?' },
+  { type: 'video', file: 'https://pub-4a8ba770d5154e8682abe06d3de4cb33.r2.dev/me%20chamu%20du%20que.mp4', caption: 'Se Me Xanu di Ke?' },
+  { type: 'video', file: 'https://pub-4a8ba770d5154e8682abe06d3de4cb33.r2.dev/ta%20bom.mp4', caption: 'Quanto Sentimento' },
+  { type: 'video', file: 'https://pub-4a8ba770d5154e8682abe06d3de4cb33.r2.dev/ta%20dentro%20ou%20fora.mp4', caption: 'Momento Bonito' },
+  { type: 'video', file: 'https://pub-4a8ba770d5154e8682abe06d3de4cb33.r2.dev/traeseirox1.mp4', caption: 'Vou te Matar' }
 ];
 
 function el(tag, cls){
