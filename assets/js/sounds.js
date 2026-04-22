@@ -4,7 +4,7 @@ const DEFAULT_VISUAL = 'assets/img/sound-visual.svg';
 const SOUND_ORDER_KEY = 'sound_order';
 
 const sounds = [
-  { id: 'adoro-pipocas-picapau', title: 'Adoro Pipocas', file: 'assets/audio/adoro-pipocas-picapau.mp3', visual: DEFAULT_VISUAL },
+  { id: 'adoro-pipocas-picapau', title: 'Adoro Pipocas', file: 'assets/audio/adoro-pipocas-picapau.mp3', visual: 'https://pub-4a8ba770d5154e8682abe06d3de4cb33.r2.dev/POL-PIPOQUEEIRA.png' },
   { id: 'alegria-de-kids', title: 'Alegria de Kids', file: 'assets/audio/alegria-de-kids.mp3', visual: DEFAULT_VISUAL },
   { id: 'cano-de-metal-caindo', title: 'Cano de Metal Caindo', file: 'assets/audio/cano-de-metal-caindo.mp3', visual: DEFAULT_VISUAL },
   { id: 'cavalo', title: 'Cavalo', file: 'assets/audio/cavalo.mp3', visual: DEFAULT_VISUAL },
